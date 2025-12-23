@@ -5,89 +5,161 @@
   <title>Happy 2 Years ❤️</title>
 
   <style>
+    * { box-sizing: border-box; }
+
     body {
       margin: 0;
       min-height: 100vh;
-      background: radial-gradient(circle at top, #ffe6f0, #e9ddff);
+      font-family: "Georgia", serif;
+      background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+      overflow: hidden;
       display: flex;
       justify-content: center;
       align-items: center;
-      font-family: "Georgia", serif;
-      overflow: hidden;
     }
 
-    /* Sticker background */
+    /* soft glow blobs */
+    .blob {
+      position: absolute;
+      width: 420px;
+      height: 420px;
+      background: radial-gradient(circle, #ffffffaa, transparent 70%);
+      filter: blur(70px);
+      opacity: 0.55;
+      animation: drift 20s infinite alternate ease-in-out;
+    }
+
+    .b1 { top: -120px; left: -120px; }
+    .b2 { bottom: -150px; right: -120px; animation-delay: 3s; }
+    .b3 { top: 45%; left: 60%; animation-delay: 6s; }
+
+    @keyframes drift {
+      from { transform: translateY(0); }
+      to { transform: translateY(-40px); }
+    }
+
+    /* floating sparkles */
+    .sparkle {
+      position: absolute;
+      font-size: 14px;
+      opacity: 0.4;
+      animation: sparkleFloat 10s linear infinite;
+      pointer-events: none;
+    }
+
+    @keyframes sparkleFloat {
+      0% { transform: translateY(0); opacity: 0; }
+      30% { opacity: 0.6; }
+      100% { transform: translateY(-120px); opacity: 0; }
+    }
+
+    /* stickers */
     .sticker {
       position: absolute;
-      font-size: 48px;
+      font-size: 46px;
       opacity: 0.18;
-      animation: float 20s ease-in-out infinite;
+      animation: float 18s ease-in-out infinite;
       user-select: none;
       pointer-events: none;
     }
 
-    .s1 { top: 8%; left: 10%; }
-    .s2 { top: 20%; left: 80%; font-size: 42px; }
-    .s3 { top: 55%; left: 5%; font-size: 55px; }
-    .s4 { top: 70%; left: 75%; }
-    .s5 { top: 40%; left: 45%; font-size: 50px; }
-    .s6 { top: 85%; left: 30%; font-size: 44px; }
+    .s1 { top: 10%; left: 8%; }
+    .s2 { top: 20%; left: 80%; }
+    .s3 { top: 65%; left: 5%; }
+    .s4 { top: 75%; left: 70%; }
+    .s5 { top: 40%; left: 45%; }
 
     @keyframes float {
       0% { transform: translateY(0); }
-      50% { transform: translateY(-35px); }
+      50% { transform: translateY(-30px); }
       100% { transform: translateY(0); }
     }
 
+    /* glass card */
     .card {
       position: relative;
       width: 90%;
       max-width: 900px;
-      background: rgba(255, 255, 255, 0.88);
-      border-radius: 32px;
       padding: 60px;
-      box-shadow: 0 35px 80px rgba(0,0,0,0.25);
-      backdrop-filter: blur(14px);
+      border-radius: 32px;
+      background: rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(22px);
+      box-shadow: 0 40px 90px rgba(0, 0, 0, 0.25);
+      border: 1px solid rgba(255,255,255,0.4);
+      animation: reveal 1.8s ease forwards;
+      opacity: 0;
+      transform: translateY(30px);
       z-index: 2;
+    }
+
+    @keyframes reveal {
+      to { opacity: 1; transform: translateY(0); }
     }
 
     h1 {
       text-align: center;
-      color: #b03060;
-      margin-bottom: 40px;
+      color: #ffffff;
+      margin-bottom: 35px;
+      text-shadow: 0 4px 14px rgba(0,0,0,0.35);
+      animation: heartbeat 3s infinite;
+    }
+
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.03); }
     }
 
     p {
       font-size: 18px;
       line-height: 1.9;
-      color: #2a2a2a;
+      color: #ffffff;
       text-align: justify;
       white-space: pre-line;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.25);
+      animation: fadeText 2.5s ease forwards;
+      opacity: 0;
+      animation-delay: 0.8s;
+    }
+
+    @keyframes fadeText {
+      to { opacity: 1; }
     }
   </style>
 </head>
 
 <body>
 
-  <!-- Teddy & Heart stickers -->
+  <!-- glow blobs -->
+  <div class="blob b1"></div>
+  <div class="blob b2"></div>
+  <div class="blob b3"></div>
+
+  <!-- sparkles -->
+  <div class="sparkle" style="left:20%; top:90%;">✨</div>
+  <div class="sparkle" style="left:50%; top:95%; animation-delay:3s;">✨</div>
+  <div class="sparkle" style="left:75%; top:92%; animation-delay:6s;">✨</div>
+
+  <!-- stickers -->
   <div class="sticker s1">🧸</div>
   <div class="sticker s2">❤️</div>
   <div class="sticker s3">🧸</div>
   <div class="sticker s4">💖</div>
-  <div class="sticker s5">🧸</div>
-  <div class="sticker s6">❤️</div>
+  <div class="sticker s5">❤️</div>
 
   <div class="card">
     <h1>Happy 2 Years, My Love ❤️</h1>
 
     <p>
-Two years with you feels unreal in the best way possible. When we first started talking, I never imagined that you would become such an important part of my life. We were just kids, still figuring ourselves out, still learning how the world works, yet somehow we found comfort in each other. Over time, you became my safe place, my happiness, and the person I look forward to every single day. Being with you taught me what care, patience, and understanding really mean.
+Two years with you feels unreal in the best way possible. When we first started talking, I never imagined that you would become such an important part of my life. We were just kids, still figuring ourselves out, yet somehow we found comfort in each other.
 
-We are just 16, and people might think we are too young to understand love, but what we share goes beyond age. For one and a half years, we’ve been in a long-distance relationship, and that hasn’t been easy at all. There were moments when I missed you so much it actually hurt. I wished I could see you, sit beside you, and talk without a screen between us. But even with distance, our bond never faded. Instead, it grew stronger.
+For one and a half years, we’ve been in a long-distance relationship, and it hasn’t been easy. There were moments when missing you felt heavy, but even with distance, our bond only grew stronger.
 
-We had our fights, misunderstandings, and silent moments, but each one taught us something important. We learned how to listen, how to say sorry, and how to choose each other even when things felt hard. You saw my overthinking, my mood swings, and my childish side, yet you stayed. And I hope you know that I see you too — your emotions, your strength, and the way you try every day.
+We had our fights and misunderstandings, but each one taught us something. You saw my flaws, my overthinking, and my childish side, yet you stayed. And I hope you know that I see you too.
 
-These two years are not just memories; they are growth. I don’t know what the future holds, but I know I want to keep walking forward with you, step by step. Thank you for loving me, trusting me, and staying with me. Happy 2 years to us. I love you so much, Madam Ji ❤️🧸
+These two years are not just memories, they are growth. I don’t know what the future holds, but I know I want to keep moving forward with you.
+
+Happy 2 years ❤️  
+I love you so much, Madam Ji 🧸
     </p>
   </div>
 
