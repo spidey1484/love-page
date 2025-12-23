@@ -8,21 +8,47 @@
     body {
       margin: 0;
       min-height: 100vh;
-      background: linear-gradient(135deg, #ffd6e8, #e6ccff);
+      background: radial-gradient(circle at top, #ffe6f0, #e9ddff);
       display: flex;
       justify-content: center;
       align-items: center;
       font-family: "Georgia", serif;
+      overflow: hidden;
+    }
+
+    /* Sticker background */
+    .sticker {
+      position: absolute;
+      font-size: 48px;
+      opacity: 0.18;
+      animation: float 20s ease-in-out infinite;
+      user-select: none;
+      pointer-events: none;
+    }
+
+    .s1 { top: 8%; left: 10%; }
+    .s2 { top: 20%; left: 80%; font-size: 42px; }
+    .s3 { top: 55%; left: 5%; font-size: 55px; }
+    .s4 { top: 70%; left: 75%; }
+    .s5 { top: 40%; left: 45%; font-size: 50px; }
+    .s6 { top: 85%; left: 30%; font-size: 44px; }
+
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-35px); }
+      100% { transform: translateY(0); }
     }
 
     .card {
+      position: relative;
       width: 90%;
       max-width: 900px;
-      background: rgba(255, 255, 255, 0.85);
-      border-radius: 30px;
+      background: rgba(255, 255, 255, 0.88);
+      border-radius: 32px;
       padding: 60px;
-      box-shadow: 0 30px 70px rgba(0,0,0,0.25);
-      backdrop-filter: blur(12px);
+      box-shadow: 0 35px 80px rgba(0,0,0,0.25);
+      backdrop-filter: blur(14px);
+      z-index: 2;
     }
 
     h1 {
@@ -43,25 +69,25 @@
 
 <body>
 
+  <!-- Teddy & Heart stickers -->
+  <div class="sticker s1">🧸</div>
+  <div class="sticker s2">❤️</div>
+  <div class="sticker s3">🧸</div>
+  <div class="sticker s4">💖</div>
+  <div class="sticker s5">🧸</div>
+  <div class="sticker s6">❤️</div>
+
   <div class="card">
     <h1>Happy 2 Years, My Love ❤️</h1>
 
     <p>
-Two years. Just saying that feels unreal, because it feels like we’ve lived a thousand moments inside this time. From the very first day we started talking, I never imagined that you would slowly become such a deep and important part of my life. We were just kids, still learning who we are, still figuring out the world, yet somehow we found comfort, safety, and understanding in each other. And that, to me, is something incredibly special.
+Two years with you feels unreal in the best way possible. When we first started talking, I never imagined that you would become such an important part of my life. We were just kids, still figuring ourselves out, still learning how the world works, yet somehow we found comfort in each other. Over time, you became my safe place, my happiness, and the person I look forward to every single day. Being with you taught me what care, patience, and understanding really mean.
 
-We are just 16, and people might say we are too young to understand love, but what we share is not about age. It’s about choosing each other every day. It’s about staying, even when things get hard. It’s about growing together, even when life puts distance between us. For one and a half years, we’ve been in a long-distance relationship, and honestly, that hasn’t been easy at all. There were days when I wished I could just see you, sit beside you, or hear your laugh in real life instead of through a screen. There were nights when missing you felt heavy, and silence felt louder than words.
+We are just 16, and people might think we are too young to understand love, but what we share goes beyond age. For one and a half years, we’ve been in a long-distance relationship, and that hasn’t been easy at all. There were moments when I missed you so much it actually hurt. I wished I could see you, sit beside you, and talk without a screen between us. But even with distance, our bond never faded. Instead, it grew stronger.
 
-But even with all that distance, we never really drifted apart. If anything, we became stronger. We learned how to communicate, how to trust, how to be patient. We learned how to support each other even when we couldn’t physically be there. That takes effort. That takes maturity. And that takes love.
+We had our fights, misunderstandings, and silent moments, but each one taught us something important. We learned how to listen, how to say sorry, and how to choose each other even when things felt hard. You saw my overthinking, my mood swings, and my childish side, yet you stayed. And I hope you know that I see you too — your emotions, your strength, and the way you try every day.
 
-You have seen me at my best and at my worst. You’ve seen my overthinking, my mood swings, my childish moments, and my fears. Yet you stayed. You listened. You cared. And I hope you know that I see you too — your softness, your strength, your emotions, your worries, and the way you try even when things feel overwhelming. I’m proud of you, not just for being my girlfriend, but for being the person you are.
-
-Our fights, our misunderstandings, and even our silence taught us lessons. They taught us how to say sorry, how to forgive, and how to understand each other better. No relationship is perfect, but what matters is that we never gave up on “us.” Every time things felt like they were falling apart, we chose to fix them instead of walking away. And that choice means everything to me.
-
-Long distance tested us in ways we never expected. It tested our patience, our trust, and our emotions. But it also showed us how deep our bond really is. Even miles apart, you feel close to my heart. Even through screens, your presence feels real. Even with time differences and busy days, you still feel like home to me.
-
-These two years are not just about memories; they are about growth. We grew together, we learned together, and we changed together. We are still young, still dreaming, still figuring life out, but I’m glad I’m doing all of that with you by my side. I don’t know exactly what the future holds, but I do know that I want to keep walking forward with you, one step at a time.
-
-Thank you for choosing me. Thank you for loving me. Thank you for staying, even when distance made things hard. Thank you for being my safe place, my comfort, and my constant. Happy 2 years to us. This is just the beginning of our story, and I can’t wait to see where it takes us.I LOVE YOU SO MUCH MADAM JI 
+These two years are not just memories; they are growth. I don’t know what the future holds, but I know I want to keep walking forward with you, step by step. Thank you for loving me, trusting me, and staying with me. Happy 2 years to us. I love you so much, Madam Ji ❤️🧸
     </p>
   </div>
 
