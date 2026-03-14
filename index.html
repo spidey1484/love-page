@@ -11,7 +11,7 @@ color:#00ff00;
 font-family:monospace;
 overflow:hidden;
 margin:0;
-transition:0.5s;
+transition:0.6s;
 }
 
 canvas{
@@ -25,15 +25,8 @@ position:absolute;
 top:40%;
 width:100%;
 text-align:center;
-font-size:22px;
-}
-
-#bar{
-width:0%;
-height:20px;
-background:#00ff00;
-margin-top:20px;
-transition:0.5s;
+font-size:24px;
+z-index:2;
 }
 
 #progress{
@@ -42,13 +35,41 @@ margin:auto;
 border:1px solid #00ff00;
 }
 
+#bar{
+width:0%;
+height:20px;
+background:#00ff00;
+margin-top:20px;
+transition:0.3s;
+}
+
+/* RED ALERT MODE */
+
 .redmode{
-background:#200000;
+background:#120000;
 color:#ff0000;
 }
 
 .redmode #bar{
 background:#ff0000;
+border-color:#ff0000;
+}
+
+/* GLITCH EFFECT */
+
+.glitch{
+animation:glitch 0.2s infinite;
+}
+
+@keyframes glitch{
+
+0%{transform:translate(0)}
+20%{transform:translate(-2px,2px)}
+40%{transform:translate(2px,-2px)}
+60%{transform:translate(-2px,0)}
+80%{transform:translate(2px,2px)}
+100%{transform:translate(0)}
+
 }
 
 </style>
@@ -70,38 +91,40 @@ background:#ff0000;
 
 <script>
 
-/* MATRIX EFFECT */
+/* MATRIX BACKGROUND */
 
-const canvas = document.getElementById("matrix")
-const ctx = canvas.getContext("2d")
+const canvas=document.getElementById("matrix")
+const ctx=canvas.getContext("2d")
 
-canvas.height = window.innerHeight
-canvas.width = window.innerWidth
+canvas.width=window.innerWidth
+canvas.height=window.innerHeight
 
-const letters = "01ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-const fontSize = 14
-const columns = canvas.width / fontSize
-const drops = []
+const letters="01ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+const fontSize=14
+const columns=canvas.width/fontSize
+const drops=[]
 
-for(let x = 0; x < columns; x++)
-drops[x] = 1
+for(let i=0;i<columns;i++){
+drops[i]=1
+}
 
 function draw(){
 
-ctx.fillStyle = "rgba(0,0,0,0.05)"
+ctx.fillStyle="rgba(0,0,0,0.05)"
 ctx.fillRect(0,0,canvas.width,canvas.height)
 
-ctx.fillStyle = "#0f0"
-ctx.font = fontSize + "px monospace"
+ctx.fillStyle="#0f0"
+ctx.font=fontSize+"px monospace"
 
-for(let i = 0; i < drops.length; i++){
+for(let i=0;i<drops.length;i++){
 
-let char = letters[Math.floor(Math.random()*letters.length)]
+let char=letters[Math.floor(Math.random()*letters.length)]
 
 ctx.fillText(char,i*fontSize,drops[i]*fontSize)
 
-if(drops[i]*fontSize > canvas.height && Math.random() > 0.975)
-drops[i] = 0
+if(drops[i]*fontSize>canvas.height && Math.random()>0.975){
+drops[i]=0
+}
 
 drops[i]++
 
@@ -113,27 +136,38 @@ setInterval(draw,33)
 
 
 
-/* PROGRESS BAR */
+/* SCANNER */
 
-let bar = document.getElementById("bar")
-let text = document.getElementById("text")
+let bar=document.getElementById("bar")
+let text=document.getElementById("text")
 
-let width = 0
+let width=0
 
-let interval = setInterval(frame,120)
+let interval=setInterval(scan,120)
 
-function frame(){
+function scan(){
 
-if(width >= 100){
+if(width>=100){
 
 clearInterval(interval)
 
+/* RED MODE */
+
 document.body.classList.add("redmode")
+text.classList.add("glitch")
 
-text.innerHTML="⚠ SECURITY ALERT<br>Simulation detected"
+text.innerHTML="⚠ SECURITY WARNING<br>Unauthorized access detected"
 
-setTimeout(()=>{
-text.innerHTML="😎 Relax! This was a hacker style simulation."
+/* WAIT 3 SEC */
+
+setTimeout(function(){
+
+text.classList.remove("glitch")
+text.innerHTML="😎 Relax bro... this was a hacker simulation prank"
+
+document.body.style.background="black"
+document.body.style.color="#00ff00"
+
 },3000)
 
 }
@@ -142,7 +176,7 @@ else{
 
 width++
 
-bar.style.width = width + "%"
+bar.style.width=width+"%"
 
 if(width==20) text.innerHTML="Scanning network..."
 if(width==40) text.innerHTML="Decrypting packets..."
