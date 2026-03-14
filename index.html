@@ -11,7 +11,7 @@ color:#00ff00;
 font-family:monospace;
 overflow:hidden;
 margin:0;
-transition:0.6s;
+transition:0.5s;
 }
 
 canvas{
@@ -43,8 +43,6 @@ margin-top:20px;
 transition:0.3s;
 }
 
-/* ALERT MODE */
-
 .alert{
 background:#120000;
 color:#ff0000;
@@ -54,8 +52,6 @@ color:#ff0000;
 background:#ff0000;
 border-color:#ff0000;
 }
-
-/* GLITCH */
 
 .glitch{
 animation:glitch 0.2s infinite;
@@ -91,13 +87,13 @@ animation:glitch 0.2s infinite;
 
 <script>
 
-/* CHANGE THIS FOR MORE SUSPENSE */
+/* CHANGE PRANK REVEAL TIME */
 
-let revealTime = 8000   // milliseconds (8000 = 8 seconds)
+let revealTime = 10000
 
 
 
-/* MATRIX */
+/* MATRIX EFFECT */
 
 const canvas=document.getElementById("matrix")
 const ctx=canvas.getContext("2d")
@@ -145,7 +141,7 @@ setInterval(draw,33)
 
 
 
-/* SCANNER */
+/* PROGRESS SCANNER */
 
 let bar=document.getElementById("bar")
 let text=document.getElementById("text")
@@ -163,23 +159,26 @@ clearInterval(interval)
 /* ALERT MODE */
 
 document.body.classList.add("alert")
-text.classList.add("glitch")
 
 matrixColor="#ff0000"
 
+text.classList.add("glitch")
+
 text.innerHTML="⚠ SYSTEM BREACH DETECTED<br>Unauthorized access found"
 
-/* DELAY BEFORE PRANK REVEAL */
+
+
+/* WAIT BEFORE REVEAL */
 
 setTimeout(function(){
 
 text.classList.remove("glitch")
+
 matrixColor="#00ff00"
 
-text.innerHTML="😎 Relax... This was a hacker simulation prank"
+document.body.classList.remove("alert")
 
-document.body.style.background="black"
-document.body.style.color="#00ff00"
+text.innerHTML="😎 Relax... This was a hacker simulation prank"
 
 },revealTime)
 
