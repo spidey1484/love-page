@@ -1,167 +1,139 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>Happy 2 Years ❤️</title>
+<title>System Scanner</title>
 
-  <style>
-    * { box-sizing: border-box; }
-    
-    body {
-      margin: 0;
-      min-height: 100vh;
-      font-family: "Georgia", serif;
-      background: linear-gradient(135deg, #ffdde1, #ee9ca7);
-      overflow: hidden;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
+<style>
 
-    /* soft glow blobs */
-    .blob {
-      position: absolute;
-      width: 420px;
-      height: 420px;
-      background: radial-gradient(circle, #ffffffaa, transparent 70%);
-      filter: blur(70px);
-      opacity: 0.55;
-      animation: drift 20s infinite alternate ease-in-out;
-    }
+body{
+background:black;
+color:#00ff00;
+font-family:monospace;
+overflow:hidden;
+margin:0;
+}
 
-    .b1 { top: -120px; left: -120px; }
-    .b2 { bottom: -150px; right: -120px; animation-delay: 3s; }
-    .b3 { top: 45%; left: 60%; animation-delay: 6s; }
+canvas{
+position:fixed;
+top:0;
+left:0;
+}
 
-    @keyframes drift {
-      from { transform: translateY(0); }
-      to { transform: translateY(-40px); }
-    }
+#content{
+position:absolute;
+top:40%;
+width:100%;
+text-align:center;
+font-size:22px;
+}
 
-    /* floating sparkles */
-    .sparkle {
-      position: absolute;
-      font-size: 14px;
-      opacity: 0.4;
-      animation: sparkleFloat 10s linear infinite;
-      pointer-events: none;
-    }
+#bar{
+width:0%;
+height:20px;
+background:#00ff00;
+margin-top:20px;
+}
 
-    @keyframes sparkleFloat {
-      0% { transform: translateY(0); opacity: 0; }
-      30% { opacity: 0.6; }
-      100% { transform: translateY(-120px); opacity: 0; }
-    }
+#progress{
+width:60%;
+margin:auto;
+border:1px solid #00ff00;
+}
 
-    /* stickers */
-    .sticker {
-      position: absolute;
-      font-size: 46px;
-      opacity: 0.18;
-      animation: float 18s ease-in-out infinite;
-      user-select: none;
-      pointer-events: none;
-    }
-
-    .s1 { top: 10%; left: 8%; }
-    .s2 { top: 20%; left: 80%; }
-    .s3 { top: 65%; left: 5%; }
-    .s4 { top: 75%; left: 70%; }
-    .s5 { top: 40%; left: 45%; }
-
-    @keyframes float {
-      0% { transform: translateY(0); }
-      50% { transform: translateY(-30px); }
-      100% { transform: translateY(0); }
-    }
-
-    /* glass card */
-    .card {
-      position: relative;
-      width: 90%;
-      max-width: 900px;
-      padding: 60px;
-      border-radius: 32px;
-      background: rgba(255, 255, 255, 0.25);
-      backdrop-filter: blur(22px);
-      box-shadow: 0 40px 90px rgba(0, 0, 0, 0.25);
-      border: 1px solid rgba(255,255,255,0.4);
-      animation: reveal 1.8s ease forwards;
-      opacity: 0;
-      transform: translateY(30px);
-      z-index: 2;
-    }
-
-    @keyframes reveal {
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    h1 {
-      text-align: center;
-      color: #ffffff;
-      margin-bottom: 35px;
-      text-shadow: 0 4px 14px rgba(0,0,0,0.35);
-      animation: heartbeat 3s infinite;
-    }
-
-    @keyframes heartbeat {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.03); }
-    }
-
-    p {
-      font-size: 18px;
-      line-height: 1.9;
-      color: #ffffff;
-      text-align: justify;
-      white-space: pre-line;
-      text-shadow: 0 2px 8px rgba(0,0,0,0.25);
-      animation: fadeText 2.5s ease forwards;
-      opacity: 0;
-      animation-delay: 0.8s;
-    }
-
-    @keyframes fadeText {
-      to { opacity: 1; }
-    }
-  </style>
+</style>
 </head>
 
 <body>
 
-  <!-- glow blobs -->
-  <div class="blob b1"></div>
-  <div class="blob b2"></div>
-  <div class="blob b3"></div>
+<canvas id="matrix"></canvas>
 
-  <!-- sparkles -->
-  <div class="sparkle" style="left:20%; top:90%;">✨</div>
-  <div class="sparkle" style="left:50%; top:95%; animation-delay:3s;">✨</div>
-  <div class="sparkle" style="left:75%; top:92%; animation-delay:6s;">✨</div>
+<div id="content">
 
-  <!-- stickers -->
-  <div class="sticker s1">🧸</div>
-  <div class="sticker s2">❤️</div>
-  <div class="sticker s3">🧸</div>
-  <div class="sticker s4">💖</div>
-  <div class="sticker s5">❤️</div>
+<div id="text">Initializing System Scan...</div>
 
-  <div class="card">
-    <h1>Happy 2 Years, My Love ❤️</h1>
+<div id="progress">
+<div id="bar"></div>
+</div>
 
-    <p>
-Two years with you feels unreal in the best way possible. When we first started talking, I never imagined that you would become such an important part of my life. We were just kids, still figuring ourselves out, yet somehow we found comfort in each other.
+</div>
 
-For one and a half years, we’ve been in a long-distance relationship, and it hasn’t been easy. There were moments when missing you felt heavy, but even with distance, our bond only grew stronger.
+<script>
 
-We had our fights and misunderstandings, but each one taught us something. You saw my flaws, my overthinking, and my childish side, yet you stayed. And I hope you know that I see you too.
+// MATRIX EFFECT
+const canvas = document.getElementById("matrix")
+const ctx = canvas.getContext("2d")
 
-These two years are not just memories, they are growth. I don’t know what the future holds, but I know I want to keep moving forward with you.
+canvas.height = window.innerHeight
+canvas.width = window.innerWidth
 
-Happy 2 years ❤️  
-I love you so much, Madam Ji 🧸
-    </p>
-  </div>
+const letters = "01ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+const fontSize = 14
+const columns = canvas.width / fontSize
+const drops = []
+
+for(let x = 0; x < columns; x++)
+drops[x] = 1
+
+function draw(){
+ctx.fillStyle = "rgba(0,0,0,0.05)"
+ctx.fillRect(0,0,canvas.width,canvas.height)
+
+ctx.fillStyle = "#0f0"
+ctx.font = fontSize + "px monospace"
+
+for(let i = 0; i < drops.length; i++){
+
+let text = letters[Math.floor(Math.random()*letters.length)]
+
+ctx.fillText(text,i*fontSize,drops[i]*fontSize)
+
+if(drops[i]*fontSize > canvas.height && Math.random() > 0.975)
+drops[i] = 0
+
+drops[i]++
+
+}
+
+}
+
+setInterval(draw,33)
+
+
+// PROGRESS BAR
+
+let bar = document.getElementById("bar")
+let text = document.getElementById("text")
+
+let width = 0
+
+let interval = setInterval(frame,120)
+
+function frame(){
+
+if(width >= 100){
+
+clearInterval(interval)
+
+text.innerHTML="Relax 😎<br>This was a Hacker Simulator Prank"
+
+}
+
+else{
+
+width++
+
+bar.style.width = width + "%"
+
+if(width==20) text.innerHTML="Scanning network..."
+if(width==40) text.innerHTML="Decrypting packets..."
+if(width==60) text.innerHTML="Analyzing system..."
+if(width==80) text.innerHTML="Finalizing scan..."
+
+}
+
+}
+
+</script>
 
 </body>
 </html>
