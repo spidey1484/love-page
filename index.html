@@ -11,6 +11,7 @@ color:#00ff00;
 font-family:monospace;
 overflow:hidden;
 margin:0;
+transition:0.5s;
 }
 
 canvas{
@@ -32,12 +33,22 @@ width:0%;
 height:20px;
 background:#00ff00;
 margin-top:20px;
+transition:0.5s;
 }
 
 #progress{
 width:60%;
 margin:auto;
 border:1px solid #00ff00;
+}
+
+.redmode{
+background:#200000;
+color:#ff0000;
+}
+
+.redmode #bar{
+background:#ff0000;
 }
 
 </style>
@@ -59,7 +70,8 @@ border:1px solid #00ff00;
 
 <script>
 
-// MATRIX EFFECT
+/* MATRIX EFFECT */
+
 const canvas = document.getElementById("matrix")
 const ctx = canvas.getContext("2d")
 
@@ -75,6 +87,7 @@ for(let x = 0; x < columns; x++)
 drops[x] = 1
 
 function draw(){
+
 ctx.fillStyle = "rgba(0,0,0,0.05)"
 ctx.fillRect(0,0,canvas.width,canvas.height)
 
@@ -83,9 +96,9 @@ ctx.font = fontSize + "px monospace"
 
 for(let i = 0; i < drops.length; i++){
 
-let text = letters[Math.floor(Math.random()*letters.length)]
+let char = letters[Math.floor(Math.random()*letters.length)]
 
-ctx.fillText(text,i*fontSize,drops[i]*fontSize)
+ctx.fillText(char,i*fontSize,drops[i]*fontSize)
 
 if(drops[i]*fontSize > canvas.height && Math.random() > 0.975)
 drops[i] = 0
@@ -99,7 +112,8 @@ drops[i]++
 setInterval(draw,33)
 
 
-// PROGRESS BAR
+
+/* PROGRESS BAR */
 
 let bar = document.getElementById("bar")
 let text = document.getElementById("text")
@@ -114,7 +128,13 @@ if(width >= 100){
 
 clearInterval(interval)
 
-text.innerHTML="Relax 😎<br>This was a Hacker Simulator Prank"
+document.body.classList.add("redmode")
+
+text.innerHTML="⚠ SECURITY ALERT<br>Simulation detected"
+
+setTimeout(()=>{
+text.innerHTML="😎 Relax! This was a hacker style simulation."
+},3000)
 
 }
 
