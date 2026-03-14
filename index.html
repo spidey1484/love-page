@@ -43,19 +43,19 @@ margin-top:20px;
 transition:0.3s;
 }
 
-/* RED ALERT MODE */
+/* ALERT MODE */
 
-.redmode{
+.alert{
 background:#120000;
 color:#ff0000;
 }
 
-.redmode #bar{
+.alert #bar{
 background:#ff0000;
 border-color:#ff0000;
 }
 
-/* GLITCH EFFECT */
+/* GLITCH */
 
 .glitch{
 animation:glitch 0.2s infinite;
@@ -91,7 +91,13 @@ animation:glitch 0.2s infinite;
 
 <script>
 
-/* MATRIX BACKGROUND */
+/* CHANGE THIS FOR MORE SUSPENSE */
+
+let revealTime = 8000   // milliseconds (8000 = 8 seconds)
+
+
+
+/* MATRIX */
 
 const canvas=document.getElementById("matrix")
 const ctx=canvas.getContext("2d")
@@ -102,18 +108,21 @@ canvas.height=window.innerHeight
 const letters="01ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 const fontSize=14
 const columns=canvas.width/fontSize
+
 const drops=[]
 
 for(let i=0;i<columns;i++){
 drops[i]=1
 }
 
+let matrixColor="#00ff00"
+
 function draw(){
 
 ctx.fillStyle="rgba(0,0,0,0.05)"
 ctx.fillRect(0,0,canvas.width,canvas.height)
 
-ctx.fillStyle="#0f0"
+ctx.fillStyle=matrixColor
 ctx.font=fontSize+"px monospace"
 
 for(let i=0;i<drops.length;i++){
@@ -151,24 +160,28 @@ if(width>=100){
 
 clearInterval(interval)
 
-/* RED MODE */
+/* ALERT MODE */
 
-document.body.classList.add("redmode")
+document.body.classList.add("alert")
 text.classList.add("glitch")
 
-text.innerHTML="⚠ SECURITY WARNING<br>Unauthorized access detected"
+matrixColor="#ff0000"
 
-/* WAIT 3 SEC */
+text.innerHTML="⚠ SYSTEM BREACH DETECTED<br>Unauthorized access found"
+
+/* DELAY BEFORE PRANK REVEAL */
 
 setTimeout(function(){
 
 text.classList.remove("glitch")
-text.innerHTML="😎 Relax bro... this was a hacker simulation prank"
+matrixColor="#00ff00"
+
+text.innerHTML="😎 Relax... This was a hacker simulation prank"
 
 document.body.style.background="black"
 document.body.style.color="#00ff00"
 
-},3000)
+},revealTime)
 
 }
 
